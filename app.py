@@ -22,9 +22,9 @@ def shutdown_session(exception=None):
 
 @app.route('/', methods=['GET'])
 def home():
-    return jsonify({'yes':'hello'})
+    return '<h1>yes hello</h1><h2>api endpoints</h2><ul><li><a href="/api/v1/devices">Devices</a></li><li><a href="/api/v1/events">Events</a></li></ul>'
 
-@app.route('/events', methods=['GET'])
+@app.route('/api/v1/events', methods=['GET'])
 def events():
     #reqBody = request.json
     
@@ -32,7 +32,7 @@ def events():
     results = [r._asdict() for r in Event.query.all()]
     return jsonify(results)
 
-@app.route('/devices', methods=['GET'])
+@app.route('/api/v1/devices', methods=['GET'])
 def devices():
     #reqBody = request.json
     
@@ -42,7 +42,7 @@ def devices():
     return jsonify(results)
 
 # scene selection
-@app.route('/logEvent', methods=['POST'])
+@app.route('/api/v1/logEvent', methods=['POST'])
 def lampPower(switch):
     if request.headers.get('DAISY_ROOTS_SECRET') == DAISY_ROOTS_SECRET:
         # add to db
