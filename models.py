@@ -28,10 +28,13 @@ class Event(Base):
     state = Column(Integer)
     device = relationship("Device", back_populates="events")
 
-    def __init__(self, deviceID=None, state=None):
+    def __init__(self, deviceID=None, state=None, time=None):
         self.deviceID = deviceID
         self.state = state
-        self.time = datetime.now()
+        if time:
+            self.time = time
+        else:
+            self.time = datetime.now()
 
     def __repr__(self):
         return f'<Event deviceID={self.deviceID!r}, state={self.state!r}>'
